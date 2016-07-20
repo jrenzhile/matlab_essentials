@@ -65,9 +65,9 @@ function [img, scaleFactor] = parsePfm(filePath)
     end
 
     %Parse line 1, determine color or BW
-    if strcmp(line1, 'PF') == 1 %Color
+    if (strcmp(line1, 'PF') == 1) || (strcmp(line1, 'PF ') == 1) %Color
         numChannels = 3;
-    elseif strcmp(line1, 'Pf') == 1 %Gray
+    elseif (strcmp(line1, 'Pf') == 1) || (strcmp(line1, 'Pf ') == 1) %Gray
         numChannels = 1;
     else %Invalid header
         fclose(fid);
