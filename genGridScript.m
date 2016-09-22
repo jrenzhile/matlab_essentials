@@ -1,4 +1,4 @@
-function genGridScript(saveLoc, saveName, nJobs)
+function genGridScript(saveLoc, saveName)
 
 fname_submit = sprintf('%s_submit.sh', saveName);
 fname_driver = sprintf('%s_grid_driver.sh', saveName);
@@ -8,12 +8,12 @@ f = fopen([saveLoc, '/', fname_submit], 'w');
 fprintf(f, '#! /bin/sh\n');
 fprintf(f, '# Bash script for sumbitting matlab jobs to an SGE cluster queue.\n\n');
 fprintf(f, '# Parameters\n');
-fprintf(f, 'NGT=%d;\n', nJobs);
+fprintf(f, 'NGT=1;\n');
 fprintf(f, 'savedir=''savedir'';\n\n\n');
 fprintf(f, '# MATLAB Path\n');
 fprintf(f, 'matlabpath=''/local/projects/matlab/R2014b/bin''\n\n');
 fprintf(f, '# Schedule Job\n');
-fprintf(f, 'qsub -t 1:$NGT %s $matlabpath $savedir \n\n', fname_driver);
+fprintf(f, 'qsub -t 1:$NGT -l "inf" %s $matlabpath $savedir \n\n', fname_driver);
 fprintf(f, '# Use for benchmarking\n');
 fprintf(f, '# qsub -pe smp 2 -q ''*@@ang'' -l arch=lx26-amd64 \n\n');
 fprintf(f, '# Option explanations:\n');
@@ -35,9 +35,9 @@ fprintf(f, 'echo "JOB ID: " $JOB_ID\n');
 fprintf(f, 'echo "SGE TASK ID: "$SGE_TASK_ID\n\n');
 fprintf(f, '# run\n');
 fprintf(f, 'matlabpath=$1\n');
-fprintf(f, 'echo "$matlabpath/matlab -nodesktop -nodisplay -nosplash -r"\n');
+fprintf(f, 'echo "LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 $matlabpath/matlab -nodesktop -nodisplay -nosplash -r"\n');
 fprintf(f, 'echo "cd ../;init_setup; %s_grid(''$SGE_TASK_ID'', ''$2''); exit;"\n', saveName);
-fprintf(f, '$matlabpath/matlab -nodesktop -nodisplay -nosplash -r \\\n');
+fprintf(f, '      LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 $matlabpath/matlab -nodesktop -nodisplay -nosplash -r \\\n');
 fprintf(f, '    "cd ../; init_setup; %s_grid(''$SGE_TASK_ID'', ''$2''); exit;"\n', saveName);
 fprintf(f, 'echo "all done"\n');
 fprintf(f, 'exit\n');
