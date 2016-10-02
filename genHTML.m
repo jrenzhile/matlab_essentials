@@ -21,7 +21,7 @@ fprintf(f, '</tr>\n');
 for i = 1:length(inds)
     cur_ind = inds(i);
     fprintf(f, '<tr>\n');
-    fprintf(f, '<td>%d</td>\n', i);
+    fprintf(f, '<td>%d</td>\n', cur_ind);
     for ii = 1:length(extensions)
         fprintf(f, '<td><img src = "%s/%s%d%s" width="600"></td>\n', ...
             loaddir{ii}, prefixes{ii}, cur_ind, extensions{ii});
