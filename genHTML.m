@@ -1,6 +1,6 @@
 function genHTML(saveName, savedir, loaddir, ...
                  inds, prefixes, extensions, ...
-                 title, columnTitle)
+                 title, columnTitle, displayTitleEachRow)
 % generate a HTML of visualizations
 % each row, img src follow the format of [loaddir]/[prefix][ind][extension]
 % 
@@ -20,6 +20,16 @@ fprintf(f, '</tr>\n');
 
 for i = 1:length(inds)
     cur_ind = inds(i);
+    
+    if displayTitleEachRow
+        fprintf(f, '<tr>\n');
+        fprintf(f, '<td>ID</td>\n');
+        for ii = 1:length(columnTitle)
+            fprintf(f, '<td align="center">%s</td>\n', columnTitle{ii});
+        end
+        fprintf(f, '</tr>\n');
+    end
+    
     fprintf(f, '<tr>\n');
     fprintf(f, '<td>%d</td>\n', cur_ind);
     for ii = 1:length(extensions)
