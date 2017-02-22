@@ -2,6 +2,9 @@ function saveas_noborder(fig_handle, savename,  additional_option)
 
 [parent_folder, imname, ext] = fileparts(savename);
 tmp_imname = sprintf('TMP_%s', imname);
+if isempty(parent_folder)
+    parent_folder = '.';
+end
 tmp_fullname = sprintf('%s/%s%s', parent_folder, tmp_imname, ext);
 
 saveas(fig_handle, tmp_fullname, additional_option);

@@ -11,7 +11,7 @@ fprintf(f, '# Parameters\n');
 fprintf(f, 'NGT=1;\n');
 fprintf(f, 'savedir=''savedir'';\n\n\n');
 fprintf(f, '# MATLAB Path\n');
-fprintf(f, 'matlabpath=''/local/projects/matlab/R2014b/bin''\n\n');
+fprintf(f, 'matlabpath=''/local/projects/matlab/R2016b/bin''\n\n');
 fprintf(f, '# Schedule Job\n');
 fprintf(f, 'qsub -t 1:$NGT -l "inf" %s $matlabpath $savedir \n\n', fname_driver);
 fprintf(f, '# Use for benchmarking\n');
