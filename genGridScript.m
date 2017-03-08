@@ -1,8 +1,13 @@
-function genGridScript(saveLoc, saveName)
+function genGridScript(saveLoc, saveName, isEditGrid)
 
 fname_submit = sprintf('%s_submit.sh', saveName);
 fname_driver = sprintf('%s_grid_driver.sh', saveName);
 fname_code = sprintf('%s_grid.m', saveName);
+if exist(fname_code, 'file')
+    fprintf('File already exist\n');
+    return;
+end
+
 % generate file to submit to grid
 f = fopen([saveLoc, '/', fname_submit], 'w');
 fprintf(f, '#! /bin/sh\n');
@@ -60,3 +65,11 @@ fprintf(f, '    fprintf(''Saved to %%s, Matlab Done\\n'', savedir);\n');
 fprintf(f, '    toc;\n\n');
 fprintf(f, 'end');
 fclose(f);
+
+if ~exist('isEditGrid', 'var')
+    isEditGrid = 1;
+end
+
+if isEditGrid
+    editGridScript(saveLoc, saveName);
+end

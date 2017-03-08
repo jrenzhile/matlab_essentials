@@ -10,7 +10,7 @@ for i = 1:nPartition
     end
     id_all{i} = cur_imgId:cur_imgId_max;
     cur_imgId = cur_imgId_max + 1;
-    if cur_imgId >= n_all
+    if cur_imgId > n_all
         break;
     end
 end
