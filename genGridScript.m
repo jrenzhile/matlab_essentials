@@ -1,10 +1,11 @@
 function genGridScript(saveLoc, saveName, isEditGrid)
 
-fname_submit = sprintf('%s_submit.sh', saveName);
+fname_submit = sprintf('%s_grid_submit.sh', saveName);
 fname_driver = sprintf('%s_grid_driver.sh', saveName);
 fname_code = sprintf('%s_grid.m', saveName);
 if exist(fname_code, 'file')
     fprintf('File already exist\n');
+    
     return;
 end
 

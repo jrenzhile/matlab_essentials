@@ -13,8 +13,8 @@ function submitGridJobID(gridFileName, jobIds)
 
 
 % Read original grid submission codes
-gridSubmit_file = loadFile2Cell(sprintf('%s_submit.sh', gridFileName));
-if ~exist(sprintf('./%s_submit.sh', gridFileName), 'file')
+gridSubmit_file = loadFile2Cell(sprintf('%s_grid_submit.sh', gridFileName));
+if ~exist(sprintf('./%s_grid_submit.sh', gridFileName), 'file')
     error('No such file or you are not in grid/');
 end
 
@@ -39,7 +39,7 @@ for i = 1:length(jobIds)
     gridSubmit_file{nlineToModify} = strjoin(cur_split, ' ');
 
     % Write cell into txt
-    newFileName{i} =  sprintf('tmp%d_%s_submit.sh', cur_id, gridFileName);
+    newFileName{i} =  sprintf('tmp%d_%s_grid_submit.sh', cur_id, gridFileName);
     saveFileFromCell(gridSubmit_file, newFileName{i});
     
     % submit job

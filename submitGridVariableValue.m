@@ -13,7 +13,7 @@ if ~exist('execute', 'var')
     execute = 0;
 end
 
-gridFileName = sprintf('%s_submit.sh', gridFileName);
+gridFileName = sprintf('%s_grid_submit.sh', gridFileName);
 if ~exist(['./' gridFileName], 'file')
     error('No such file or you are not in grid/');
 end
