@@ -42,6 +42,9 @@ for i=1:length(file_name)
         [M  c_map]=imread([file_path,file_name{i}]);
     else
         a=imread([file_path,file_name{i}]);
+        if size(a, 3) == 1
+            a = cat(3, a, a, a);
+        end
         [M  c_map]= rgb2ind(a,256);
     end
     if i==1
